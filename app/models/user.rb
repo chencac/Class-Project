@@ -28,6 +28,7 @@ class User < ApplicationRecord
 
   # relationships
   has_many :resumes
+  has_many :comments
 
   # enum
   enum role: { user: 1, company: 2, staff: 3 }
