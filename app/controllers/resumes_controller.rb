@@ -1,6 +1,6 @@
 class ResumesController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_resume, only: %i[show edit update destroy]
+  before_action :find_resume, only: %i[like show edit update destroy]
 
   def index
     if current_user.user?
@@ -29,6 +29,10 @@ class ResumesController < ApplicationController
     else
       render :edit
     end
+  end
+  
+  def like 
+    render json:{ id: params[:id], status: "liked" }
   end
 
   def new

@@ -1,16 +1,7 @@
 Rails.application.routes.draw do
   root "pages#home"
 
-  # GET /users/sign_in
-  # POST /users/....
-  # Cookie
-
-  # get https://facebook.com
-  # cookie -> session
-
   resource :sessions, only: [:create, :destroy]
-
-  # /users/sign_in
 
   resource :users, except: %i[new destroy] do
     get "sign_up", action: "new"
@@ -18,6 +9,10 @@ Rails.application.routes.draw do
   end
 
   resources :resumes do 
+    member do 
+      post :like
+    end
+    
     resources :comments, shallow: true, only: %i[create edit update destroy]
   end
 
