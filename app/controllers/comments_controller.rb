@@ -13,9 +13,15 @@ class CommentsController < ApplicationController
   end
 
   def edit
+   
   end
 
   def update
+    if @comment.update(comment_params)
+      redirect_to @comment.resume, notice: "更新成功"
+    else
+      render :edit
+    end
   end
 
   def destroy 
