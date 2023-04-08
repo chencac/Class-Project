@@ -1,8 +1,10 @@
 <h1 class="heading-1">更新評論</h1>
 
-<%= form_with(model: @comment ) do |f| %>
-<%= f.text_area :content, class: 'w-full rounded', rows:4 %>
-<%= f.submit class: 'btn btn-primary'%>
-        
+<%= turbo_frame_tag(@comment) do %> 
+    <%= form_with(model: @comment ) do |f| %>
+    <%= f.text_area :content, class: 'w-full rounded', rows:4 %>
+    <%= f.submit '更新', class: 'btn btn-primary'%>
+    <%= link_to '取消', :back, class: 'btn btnprimary' %>
+    <% end %>
 <% end %>
   

@@ -26,8 +26,9 @@ class CommentsController < ApplicationController
 
   def destroy 
     authorize(@comment)
+
     @comment.destroy
-    redirect_to resume_path(@comment.resume), notice: '評論已刪除'
+   
   end
 
   private 
