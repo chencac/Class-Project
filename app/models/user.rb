@@ -39,7 +39,7 @@ class User < ApplicationRecord
       genders.map { |k, v| [k, k] }
     end
 
-    def login(email:, password:)
+    def login(email: , password:)
       encrypted_password = Digest::SHA1.hexdigest("7a#{password}9x")
       find_by(email: email, password: encrypted_password)
     end
