@@ -10,30 +10,35 @@ export default class extends Controller {
 
 connect() {
   this.element.setAttribute("data-action", "click->favorite#like")
-  this.resumeId = this.element.dataset.id
+  const { liked, id } = this.element.dataset
+  this.resumeId = id
+  this.isLiked = liked == "true" ? true : false
+
+  this.updateIcon
+}
+
+updateIcon(){
+  if (this.isLiked){
+  this.iconTarget.classList.remove("fa-regular")
+  this.iconTarget.classList.add("fa-solid")
+  }else{
+  this.iconTarget.classList.add("fa-regular")
+  this.iconTarget.classList.remove("fa-solid")
+  } 
+
 }
 
 like(){
-    Rails.ajax({
-        url: `/resumes/${this.resumeId}/like`, // or "/posts.json"
+  this.isLiked = !this.isLiked
+  this.updateIcon()
+
+  Rails.ajax({
+        url: `/resumes/${this.resumeId}/like`,
         type: "POST",
         success: function ({id,status}) {
           console.log(id, status);
         },
-        error: function (error) {
-          console.error("Error:", error);
-        },
       });
-    if(this.isLiked){
-
-        this.iconTarget.classList.add("fa-regular")
-        this.iconTarget.classList.remove("fa-solid")
-    }else{
-        this.iconTarget.classList.remove("fa-regular")
-        this.iconTarget.classList.add("fa-solid")
-    }
-    this.isLiked = !this.isLiked
-  
   }
 }
     
